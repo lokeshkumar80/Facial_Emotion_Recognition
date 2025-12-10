@@ -1,0 +1,25 @@
+name: facial_emotion_legacy
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - pip
+  - pip:
+      - tensorflow==2.20.0
+      - numpy==1.26.4
+      - opencv-python==4.8.1.78
+      - h5py==3.7.0
+      - pillow
+
+
+
+# Then conda env create -f environment.yml
+# conda activate facial_emotion_legacy
+# pip install tensorflow==2.20.0 keras==2.10.0 numpy==1.26.4 opencv-python==4.8.1.78 h5py==3.7.0 pillow
+
+# conda env create -f environment.yml
+# conda activate facial_emotion_legacy
+# python realtimedetection.py
+
+
+
