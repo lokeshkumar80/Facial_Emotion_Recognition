@@ -1,86 +1,215 @@
-# Facial Emotion Recognition 😄😠😢
+# Facial Emotion Recognition (Deep Learning – CNN)
 
-A deep learning-based system to detect human emotions from facial expressions using CNNs, trained on the FER-2013 dataset.
+This repository implements a complete **Facial Emotion Recognition (FER)** system using deep learning (TensorFlow/Keras).  
+It includes multiple trained models, evaluation metrics, confusion matrices, and a real-time emotion detection system using OpenCV.
 
-<!-- optional, you can upload a banner -->
+The system classifies facial expressions into the following emotions:
 
----
-
-## 📌 Project Overview
-
-This project implements a Convolutional Neural Network (CNN) using TensorFlow/Keras to recognize facial expressions in real-time or from static images. It supports 7 key emotions:
-
-- 😄 Happy
-- 😠 Angry
-- 😢 Sad
-- 😮 Surprise
-- 😐 Neutral
-- 😨 Fear
-- 🤢 Disgust
+- Angry  
+- Disgust  
+- Fear  
+- Happy  
+- Neutral  
+- Sad  
+- Surprise  
 
 ---
 
-## 🚀 Features
+## 🚀 Key Features
 
-- Real-time facial emotion detection using OpenCV
-- Model trained on the FER-2013 dataset
-- Simple and clean GUI for image-based emotion detection
-- CNN with high accuracy on validation/test sets
-- Easy to extend and integrate into other applications
-
----
-
-## 🧠 Model Architecture
-
-The CNN is built using the following structure:
-
-- 3 Convolutional layers
-- 2 MaxPooling layers
-- Dropout layers for regularization
-- Fully connected Dense layers
-- Output layer with softmax activation for 7 classes
-
-Input -> Conv2D -> MaxPooling -> Conv2D -> MaxPooling -> Conv2D -> Flatten -> Dense -> Output
-
-**FER-2013 (Facial Expression Recognition 2013)**  
-- Source: [Kaggle](https://www.kaggle.com/datasets/msambare/fer2013)
-- 35,887 grayscale images (48x48)
-- 7 emotions labeled
-- Split: 28,709 training / 3,589 validation / 3,589 test
+- Multiple training experiments (Initial, Intermediate, Final)
+- JSON + Keras model + weights for reproducibility
+- Real-time emotion detection via webcam
+- Confusion matrices (CSV + PNG)
+- Classification reports
+- Accuracy & loss curve visualizations
+- Reproducible environment (requirements.txt + environment.yml)
 
 ---
 
-## 🛠️ Setup & Installation
+## 📂 Project Structure
+-├──Facial_Emotion_Recognition # Project folder
 
-### 📦 Requirements
+-├── FINAL_TRAINING.ipynb # Final training experiment
 
-Install dependencies from `requirements.txt`:
+-├── INITIAL_TRAINING.ipynb # Initial training experiment
 
+-├── TRAINING.ipynb # Intermediate training
+-|
+-├── realtimedetection.py # Real-time emotion detection
+-├── oldrealtimedetection.py # Older version of detector
+-│
+-├── facialemotionmodel.json # Intermediate model architecture
+-├── facialemotionmodel.keras # Intermediate model
+-├── facialemotionmodel.weights.h5 # Intermediate weights
+-│
+-├── initialfacialemotionmodel.json # Initial model architecture
+-├── initialfacialemotionmodel.keras # Initial model
+-├── initialfacialemotionmodel.weights.h5 # Initial weights
+-│
+-├── finalfacialemotionmodel.json # Final model architecture
+-├── finalfacialemotionmodel.keras # Final trained model (recommended)
+-├── finalfacialemotionmodel.weights.h5 # Final weights
+-│
+-├── best_emotion_cnn.weights.h5 # Best-performing model weights
+-│
+-├── Confusion_matrix_FINAL_TRAINING.png
+-├── Confusion_matrix_INITIAL_TRAINING.png
+-├── Confusion_matrix_TRAINING.png
+-│
+-├── confusion_matrix_FINAL_TRAINING.csv
+-├── confusion_matrix_INITIAL_TRAINING.csv
+-├── confusion_matrix_TRAINING.csv
+-│
+-├── accuracy_curve_final.png
+-├── accuracy_curve_initial.png
+-├── accuracy_curve_intermediate.png
+-│
+-├── loss_curve_final.png
+-├── loss_curve_initial.png
+-├── loss_curve_intermediate.png
+-│
+-├── classification_report_FINAL_TRAINING.txt
+-├── classification_report_INITIAL_TRAINING.txt
+-├── classification_report_TRAINING.txt
+-│
+-├── images/
+-│ ├── train/ # Training dataset
+-│ └── test/ # Testing dataset
+-│ ├── angry/
+-│ ├── disgust/
+-│ ├── fear/
+-│ ├── happy/
+-│ ├── neutral/
+-│ ├── sad/
+-│ ├── surprise/
+-│
+-├── requirements.txt # Python dependencies
+-├── environment.yml # Conda environment
+-└── README.md
+
+---
+
+## 🧠 Model Overview
+
+CNN-based architecture used in three stages:
+
+### **Initial Model**
+- Baseline performance  
+- Fewer epochs  
+
+### **Intermediate Model**
+- Improved tuning & accuracy  
+
+### **Final Model (Recommended)**
+- Best accuracy  
+- Use:
+  - `finalfacialemotionmodel.json`
+  - `finalfacialemotionmodel.keras`
+  - `finalfacialemotionmodel.weights.h5`
+
+---
+
+## ⚙️ Installation & Setup
+
+### **1️⃣ Clone the Repository**
 ```bash
+git clone https://github.com/lokeshkumar80/Facial_Emotion_Recognition.git
+
+cd Facial_Emotion_Recognition
+
+2️⃣ Install Dependencies
+
+Option A: Using pip
+bash
 pip install -r requirements.txt
 
-// Or manually:
-
-pip install tensorflow keras opencv-python matplotlib numpy pandas
-
-```
-### ▶️ How to Run
+Option B: Using Conda
+bash
+conda env create -f environment.yml
+conda activate facial_emotion_env
+Includes TensorFlow + NumPy versions that avoid compatibility issues.
 
 🧪 Training the Model
+Use any of the training notebooks:
 
-```bash
-python trainmodel.py
+INITIAL_TRAINING.ipynb
 
-```
-This trains the CNN model on the FER-2013 dataset.
+TRAINING.ipynb
 
-### 🎯 Testing the Model
+FINAL_TRAINING.ipynb
 
-```bash
-python emotiondetector.py
+Each notebook includes preprocessing, model creation, training, saving weights, and visualizations.
 
-```
-This runs the model on live webcam feed or test images.
+📊 Evaluation Results
+Included in the repo:
 
+Confusion matrices (PNG + CSV)
 
+Classification reports (TXT)
 
+Accuracy curves
+
+Loss curves
+
+These help compare performance across training stages.
+
+🎥 Real-Time Emotion Detection
+To run the live webcam detector:
+
+bash
+python realtimedetection.py
+
+This script:
+Loads the final trained model
+
+Detects faces via OpenCV
+
+Predicts emotion
+
+Displays real-time results
+
+Press Q to exit.
+
+🛠️ Technologies Used
+Python 3.10+
+
+TensorFlow / Keras
+
+NumPy, Pandas
+
+OpenCV
+
+Matplotlib
+
+Jupyter Notebook
+
+📌 Troubleshooting
+❗ NumPy 1.x vs 2.x TensorFlow Error
+Solution:
+
+bash
+pip install -r requirements.txt
+
+❗ Model Load Error
+python
+from tensorflow.keras.models import model_from_json
+
+with open("finalfacialemotionmodel.json") as f:
+    model_json = f.read()
+
+model = model_from_json(model_json)
+model.load_weights("finalfacialemotionmodel.weights.h5")
+
+📬 Contact
+For improvements or issues, open an Issue or Pull Request on GitHub.
+---
+
+If you want:
+
+✅ Badges (TensorFlow, Python version, GitHub stars)  
+✅ A project logo  
+✅ A screenshot section  
+✅ A demo video/GIF section  
+
+Just tell me — I can add them.
